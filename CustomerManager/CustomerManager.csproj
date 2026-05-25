@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<StartupObject>CustomerManager.Program</StartupObject>
+
+		<!-- Application Version -->
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<Version>1.0.0</Version>
+
+		<!-- Application Metadata -->
+		<ApplicationTitle>Customer Manager</ApplicationTitle>
+		<Product>Customer Manager CRUD Application</Product>
+		<Description>A simple CRUD application for managing customer information with auto-update capability</Description>
+		<Company>Your Company</Company>
+		<Authors>Your Name</Authors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- SQLite for local database -->
+		<PackageReference Include="System.Data.SQLite" Version="1.0.118.0" />
+	</ItemGroup>
+
+</Project>

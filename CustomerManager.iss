@@ -2,7 +2,7 @@
 ; Requires Inno Setup 6+ (https://jrsoftware.org/isdl.php)
 
 #define MyAppName "Customer Manager"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "Your Company"
 #define MyAppURL "https://github.com/Bibash-Basnet/CustomerManager"
 #define MyAppExeName "CustomerManager.exe"

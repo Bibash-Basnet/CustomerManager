@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace CustomerManager
 {
@@ -108,9 +109,10 @@ namespace CustomerManager
             TabPage aboutTab = new TabPage("About & Updates");
             aboutTab.BackColor = System.Drawing.SystemColors.Control;
 
-            Label lblAppName = new Label() { Text = "Customer Manager v1.0.0", Left = 20, Top = 20, Width = 400, Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold) };
+            string appVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Label lblAppName = new Label() { Text = "Customer Manager", Left = 20, Top = 20, Width = 400, Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold) };
             Label lblDescription = new Label() { Text = "A simple CRUD application for managing customer information", Left = 20, Top = 60, Width = 400 };
-            Label lblCurrentVersion = new Label() { Text = "Current Version: 1.0.0", Left = 20, Top = 100, Width = 400 };
+            Label lblCurrentVersion = new Label() { Text = $"Current Version: {appVersion}", Left = 20, Top = 100, Width = 400 };
             Label lblLastUpdate = new Label() { Text = "Last Updated: " + System.DateTime.Now.ToString(), Left = 20, Top = 140, Width = 400 };
 
             Button btnCheckUpdates = new Button() { Text = "Check for Updates", Left = 20, Top = 180, Width = 150 };
@@ -120,12 +122,24 @@ namespace CustomerManager
             Label lblUpdateStatus = new Label() { Text = "", Left = 20, Top = 220, Width = 400 };
             this.lblUpdateStatus = lblUpdateStatus;
 
+            ProgressBar updateProgress = new ProgressBar()
+            {
+                Left = 20,
+                Top = 250,
+                Width = 400,
+                Height = 20,
+                Style = ProgressBarStyle.Blocks,
+                Visible = false
+            };
+            this.updateProgress = updateProgress;
+
             aboutTab.Controls.Add(lblAppName);
             aboutTab.Controls.Add(lblDescription);
             aboutTab.Controls.Add(lblCurrentVersion);
             aboutTab.Controls.Add(lblLastUpdate);
             aboutTab.Controls.Add(btnCheckUpdates);
             aboutTab.Controls.Add(lblUpdateStatus);
+            aboutTab.Controls.Add(updateProgress);
 
             // Add tabs to tab control
             tabControl.TabPages.Add(crudTab);
@@ -133,6 +147,13 @@ namespace CustomerManager
 
             // Add tab control to form
             this.Controls.Add(tabControl);
+
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = false;
+            backgroundWorker.DoWork += BackgroundWorker_DoWork;
+            backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
+            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
         }
 
         // Control declarations
@@ -148,5 +169,7 @@ namespace CustomerManager
         private Button btnCheckUpdates;
         private DataGridView dgvCustomers;
         private Label lblUpdateStatus;
+        private ProgressBar updateProgress;
+        private BackgroundWorker backgroundWorker;
     }
 }

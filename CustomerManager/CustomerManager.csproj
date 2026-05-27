@@ -18,6 +18,9 @@
 		<Description>A simple CRUD application for managing customer information with auto-update capability</Description>
 		<Company>Your Company</Company>
 		<Authors>Your Name</Authors>
+
+		<!-- Application Icon -->
+		<ApplicationIcon>app.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
